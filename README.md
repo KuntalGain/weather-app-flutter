@@ -1,16 +1,34 @@
-# weather_app
+# Weather App (v.1.0)
 
-A new Flutter project.
+## ⭐Table Content
 
-## Getting Started
+1.[Description](#🏷️description)
+2.[Features](#🏷️-features)
+3.[Future Updates](#🏷️-future-updates)
+4.[Permissions](#🏷️permissions)
 
-This project is a starting point for a Flutter application.
+## 🏷️Description
 
-A few resources to get you started if this is your first Flutter project:
+Simple Weather App Build using Flutter Framework and Weatheapi.com realtime Weather API & Forcast API.with Inteactive User Interface (UI)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 🏷️ Features
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Interactive UI
+- Splash screen
+- Realtime Weather
+- next 7 Days Forcast
+- Additional Information as Feels Like,Humidity,Pressure,Wind Speed
+- 3D Weather Icons defined by Conditions
+- City Storage
+- Current Location
+- Notification Alert of Rain Prediction
+
+## 🏷️ Future Updates
+- 14 Days Weather Forcast
+- Graphical Virtualizer
+- More Infomation
+
+## 🏷️Permissions
+- Storage
+- Location
+
