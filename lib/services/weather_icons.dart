@@ -4,6 +4,8 @@ String getWeatherIcon(String condition) {
   switch (condition.toLowerCase()) {
     case 'clear':
       return 'Assets/sun(1).png';
+    case 'sunny':
+      return 'Assets/sun(1).png';
     case 'partly cloudy':
       return 'Assets/partly-cloudy.png';
     case 'cloudy':
