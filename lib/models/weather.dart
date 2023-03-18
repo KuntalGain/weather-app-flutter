@@ -30,23 +30,23 @@ class Weather {
 }
 
 class Forcast {
-  String date;
+  String time;
   double temp;
   String condition;
   double? weatherCondition;
 
   Forcast(
-      {this.date = '',
+      {this.time = '',
       this.temp = 0.0,
       this.condition = '',
       this.weatherCondition = 0.0});
 
   factory Forcast.fromJson(Map<String, dynamic> json) {
     return Forcast(
-      temp: json["day"]["avgtemp_c"],
-      date: json["date"],
-      condition: json["day"]["condition"]["text"],
-      weatherCondition: json["day"]["daily_chance_of_rain"],
+      temp: json["hour"]["temp_c"],
+      time: json["hour"]["time"],
+      condition: json["hour"]["condition"]["text"],
+      weatherCondition: json["hour"]["daily_chance_of_rain"],
     );
   }
 }

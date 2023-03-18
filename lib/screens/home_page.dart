@@ -93,8 +93,8 @@ class _HomePageState extends State<HomePage> {
         await weatherService.fetchForcast(db.cityName.toString());
     DateTime now = DateTime.now();
     print(now);
-    DateTime targetDate = now.add(Duration(days: 7));
-    String targetDateTime = DateFormat('yyyy-MM-dd').format(targetDate);
+    DateTime targetDate = now.add(Duration(hours: 7));
+    String targetDateTime = DateFormat('yyyy-MM-dd HH:mm').format(targetDate);
 
     // Forcast? targetForcast = forecast.firstWhere(
     //   (f) => f.date == targetDate,
@@ -104,19 +104,16 @@ class _HomePageState extends State<HomePage> {
     Forcast? targetForcast;
 
     for (var f in forecast) {
-      print(f.date + " " + f.condition);
-
-      if (f.date == targetDateTime) {
+      if (f.time == targetDateTime) {
         targetForcast = f;
         break;
       }
     }
+
     if (targetForcast == null) {
       print('No Forcast Record');
-      print(targetDateTime);
     } else {
       print('${targetForcast.temp}°C');
-      print(targetDateTime);
     }
   }
 
@@ -217,6 +214,7 @@ class _HomePageState extends State<HomePage> {
                                                     setState(() {
                                                       db.cityName =
                                                           db.city[index];
+                                                      getWeather();
                                                       Navigator.pop(context);
                                                     });
                                                     db.updatedata();
@@ -394,51 +392,6 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.black,
               ),
             ),
-            Text(
-              'Forecast',
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            FutureBuilder<List<Forcast>>(
-              future: weatherService.fetchForcast(db.cityName.toString()),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  final forcastList = snapshot.data;
-                  return Expanded(
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 7,
-                        itemBuilder: (context, index) {
-                          final forcast = forcastList![index];
-                          final dateComponent = forcast.date.split('-');
-                          final day = dateComponent[2];
-                          final month = dateComponent[1];
-                          print(forcast.condition);
-                          final dateString = '$day/$month';
-                          return weatherCard(
-                            temp: forcast.temp,
-                            date: dateString,
-                            condition: condition,
-                          );
-                        }),
-                  );
-                } else if (snapshot.hasError) {
-                  return Text('${snapshot.error}');
-                } else {
-                  return CircularProgressIndicator();
-                }
-              },
-            ),
-
-            Container(
-              margin: EdgeInsets.all(20),
-              child: Divider(
-                thickness: 2.0,
-                color: Colors.black,
-              ),
-            ),
 
             Text(
               "Additional Informtion",
@@ -456,6 +409,51 @@ class _HomePageState extends State<HomePage> {
                     "${feelsLike}",
                   )
                 : CircularProgressIndicator(),
+
+            Container(
+              margin: EdgeInsets.all(20),
+              child: Divider(
+                thickness: 2.0,
+                color: Colors.black,
+              ),
+            ),
+            Text(
+              '24 Hour Forecast',
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            FutureBuilder<List<Forcast>>(
+              future: weatherService.fetchForcast(db.cityName.toString()),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final forcastList = snapshot.data;
+                  return Expanded(
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 24,
+                        itemBuilder: (context, index) {
+                          final forcast = forcastList![index];
+
+                          String datetime = forcast.time;
+                          String dateString =
+                              datetime.substring(11, datetime.length);
+
+                          return weatherCard(
+                            temp: forcast.temp,
+                            date: dateString,
+                            condition: condition,
+                          );
+                        }),
+                  );
+                } else if (snapshot.hasError) {
+                  return Text('${snapshot.error}');
+                } else {
+                  return CircularProgressIndicator();
+                }
+              },
+            ),
           ],
         ),
       ), // Temperature

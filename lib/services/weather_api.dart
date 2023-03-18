@@ -26,22 +26,23 @@ class WeatherService {
     String api_key = 'e1de2bb03f254e69b6370820230203';
 
     String url =
-        'http://api.weatherapi.com/v1/forecast.json?key=$api_key&q=$place&days=7&aqi=no&alerts=no';
+        'http://api.weatherapi.com/v1/forecast.json?key=e1de2bb03f254e69b6370820230203&q=London&days=1&aqi=no&alerts=no';
 
     final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body);
+      // print(response.body);
 
       // extract json data
       List<Forcast> forecast = [];
 
-      List<dynamic> forecastJson = json['forecast']['forecastday'];
+      List<dynamic> forecastJson = json['forecast']['forecastday'][0]['hour'];
       forecastJson.forEach((dayJson) {
-        String date = dayJson['date'];
-        double temperature = dayJson['day']['avgtemp_c'];
+        String time = dayJson['time'];
+        double temperature = dayJson['temp_c'];
 
-        forecast.add(Forcast(date: date, temp: temperature));
+        forecast.add(Forcast(time: time, temp: temperature));
       });
 
       return forecast;
