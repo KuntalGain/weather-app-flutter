@@ -6,8 +6,10 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:weather_app/screens/retry_page.dart';
+import 'package:weather_app/screens/splash_screen.dart';
 import 'package:weather_app/services/notification_alert.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:splash/splash.dart';
 
 void main() async {
   // WidgetsFlutterBinding.ensureInitialized();
@@ -58,7 +60,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       // home: HomePage(),
       // home: UpdateApp(),
-      home: _isOffline ? RetryPageState(onRetryPressed: () {}) : HomePage(),
+      home: _isOffline ? RetryPageState(onRetryPressed: () {}) : SplashScreen(),
     );
   }
 }

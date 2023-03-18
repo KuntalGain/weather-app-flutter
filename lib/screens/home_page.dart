@@ -93,7 +93,7 @@ class _HomePageState extends State<HomePage> {
         await weatherService.fetchForcast(db.cityName.toString());
     DateTime now = DateTime.now();
     print(now);
-    DateTime targetDate = now.add(Duration(hours: 7));
+    DateTime targetDate = now.add(Duration(hours: 24));
     String targetDateTime = DateFormat('yyyy-MM-dd HH:mm').format(targetDate);
 
     // Forcast? targetForcast = forecast.firstWhere(
@@ -215,6 +215,7 @@ class _HomePageState extends State<HomePage> {
                                                       db.cityName =
                                                           db.city[index];
                                                       getWeather();
+                                                      getForcast();
                                                       Navigator.pop(context);
                                                     });
                                                     db.updatedata();
