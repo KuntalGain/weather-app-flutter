@@ -1,3 +1,4 @@
+// if Internet Connectivity off then use this widget
 import 'package:flutter/material.dart';
 
 class RetryPageState extends StatelessWidget {

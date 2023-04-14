@@ -1,7 +1,7 @@
-import 'dart:async';
+// Screen will show everytime Launches the app
 
+import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:weather_app/constants/constants.dart';
 import 'package:weather_app/screens/home_page.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -10,14 +10,15 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  double _progressValue = 0.0;
+  double _progressValue = 0.0; // keep track of progress
 
   @override
   void initState() {
     super.initState();
-    startTimer();
+    startTimer(); // method to show loading with percentage
   }
 
+  // After Loading it will redirect to HomePage Screen
   startTimer() {
     Timer.periodic(Duration(milliseconds: 100), (Timer timer) {
       setState(() {
@@ -47,6 +48,8 @@ class _SplashScreenState extends State<SplashScreen> {
           // mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             SizedBox(height: 300),
+
+            // App Logo
             Container(
                 padding: EdgeInsets.all(20),
                 decoration: BoxDecoration(
@@ -57,7 +60,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         color: Colors.grey.withOpacity(0.5),
                         spreadRadius: 5,
                         blurRadius: 7,
-                        offset: Offset(0, 3), // changes position of shadow
+                        offset: Offset(0, 3),
                       ),
                     ]),
                 child: Image.asset(
@@ -67,6 +70,8 @@ class _SplashScreenState extends State<SplashScreen> {
                   fit: BoxFit.cover,
                 )),
             SizedBox(height: 20),
+
+            // App Title
             Text(
               "Weatherify",
               style: TextStyle(
@@ -75,6 +80,8 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             SizedBox(height: 100),
+
+            // Circular Progress bar with Animated Percentage
             Column(
               children: [
                 CircularProgressIndicator(

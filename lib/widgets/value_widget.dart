@@ -3,6 +3,8 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:weather_app/constants/constants.dart';
 
+// Method for Showing Additional Information
+
 Widget additionalInformation(
     String wind, String humidity, String pressure, String feels_like) {
   return Container(

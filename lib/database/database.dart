@@ -1,13 +1,14 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
+// No-SQL Database to store the instance
 class WeatherDatabase {
-  List<String> city = [];
-  String cityName = '';
+  List<String> city = []; // List of cities
+  String cityName = ''; // Name of City
 
   // reference to box
   final _mybox = Hive.box('mybox');
 
-  // Default Method of Running
+  // Default data
 
   void createDefaultData() {
     city = ["London", "New York"];

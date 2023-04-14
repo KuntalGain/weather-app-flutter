@@ -1,9 +1,11 @@
-import 'dart:convert';
+// API provider - api.weatherapi.com
 
+import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:weather_app/models/weather.dart';
 
 class WeatherService {
+  // Method to fetch current weather data from certain city
   Future<Weather> getWeatherdata(String place) async {
     final queryParameters = {
       'key': 'e1de2bb03f254e69b6370820230203',
@@ -22,6 +24,7 @@ class WeatherService {
     }
   }
 
+  // Method to fetch forcast data for 24hr
   Future<List<Forcast>> fetchForcast(String place) async {
     String api_key = 'e1de2bb03f254e69b6370820230203';
 
@@ -32,7 +35,7 @@ class WeatherService {
 
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body);
-      // print(response.body);
+
       // extract json data
       List<Forcast> forecast = [];
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// get the icon fro every possible conditions
 String getWeatherIcon(String condition) {
   switch (condition.toLowerCase()) {
     case 'clear':
@@ -33,7 +34,7 @@ String getWeatherIcon(String condition) {
     case 'freezing rain':
       return 'Assets/snow(1).png';
     case 'patchy light rain with thunder':
-      return 'Assets/storm.png';
+      return 'Assets/storm(1).png';
     case 'moderate or heavy rain with thunder':
       return 'Assets/storm(1).png';
     case 'patchy light snow with thunder':

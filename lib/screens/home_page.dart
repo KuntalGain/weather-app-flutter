@@ -26,14 +26,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // reference to box
-
+  // Database
   final _mybox = Hive.box('mybox');
   WeatherDatabase db = WeatherDatabase();
 
+  // Make Instance of weather APIs
   WeatherService weatherService = WeatherService();
   Weather weather = Weather();
   Forcast forcast = Forcast();
+
+  // Notification Services
   NotificationServices notificationServices = NotificationServices();
 
   // parameters
@@ -58,21 +60,28 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     db.city.add('London');
+
+    // if app launched for the first Time then create data
     if (_mybox.get("WEATHER_KEY") == null) {
       db.createDefaultData();
     } else {
+      // if data exists then load data
       db.loadData();
     }
 
     super.initState();
-    getWeather();
-    getForcast();
-    // _loadCity();
+    getWeather(); // get Current Weather
+    getForcast(); // get 24hr Forcast
+
+    // Initialize the notification
     notificationServices.initializeNotification();
+
+    // Alert User's there Gonna be Rainfall
     notificationServices.sendNotification("Bring Umbrella ☂️",
         "In ${db.cityName} gonna be RainFall", forcast.weatherCondition);
   }
 
+  // Method to fetch Current Weather
   void getWeather() async {
     weather = await weatherService.getWeatherdata(db.cityName.toString());
 
@@ -88,6 +97,7 @@ class _HomePageState extends State<HomePage> {
     print(weather.temp);
   }
 
+  // Method for Fetch 24hr Weather Forcast
   Future<void> getForcast() async {
     List<Forcast> forecast =
         await weatherService.fetchForcast(db.cityName.toString());
@@ -95,11 +105,6 @@ class _HomePageState extends State<HomePage> {
     print(now);
     DateTime targetDate = now.add(Duration(hours: 24));
     String targetDateTime = DateFormat('yyyy-MM-dd HH:mm').format(targetDate);
-
-    // Forcast? targetForcast = forecast.firstWhere(
-    //   (f) => f.date == targetDate,
-    //   orElse: () => Forcast(date: targetDateTime, temp: 0),
-    // );
 
     Forcast? targetForcast;
 
@@ -117,6 +122,7 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  // Method that asks User's for Location Permission and fetch current location weather
   Future<Position> _getCurrentLocation() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
 
@@ -146,6 +152,8 @@ class _HomePageState extends State<HomePage> {
       resizeToAvoidBottomInset: false,
       body: Container(
         margin: EdgeInsets.all(15),
+
+        // resposivness of our App
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: Column(
@@ -158,6 +166,7 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  // City Name & date
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -178,6 +187,7 @@ class _HomePageState extends State<HomePage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      // city History
                       IconButton(
                           onPressed: () {
                             print(db.city);
@@ -238,6 +248,7 @@ class _HomePageState extends State<HomePage> {
                             size: 35,
                             color: Colors.blue,
                           )),
+                      // Add City
                       IconButton(
                           onPressed: () {
                             showDialog(
@@ -299,6 +310,7 @@ class _HomePageState extends State<HomePage> {
                             size: 35,
                             color: Colors.blue,
                           )),
+                      // Current Location
                       IconButton(
                         icon: Icon(
                           Icons.location_on,
@@ -329,7 +341,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
 
-            // Icon
+            // Weather Card
 
             Container(
               padding: EdgeInsets.all(20),
@@ -347,6 +359,7 @@ class _HomePageState extends State<HomePage> {
               ),
               child: Column(
                 children: [
+                  // weather icon
                   Center(
                       child: Image.asset(
                     getWeatherIcon(condition),
@@ -356,6 +369,8 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(
                     height: 20,
                   ),
+
+                  // current Temperature
                   (temp != 0.0)
                       ? Center(
                           child: Text(
@@ -370,6 +385,8 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(
                     height: 5,
                   ),
+
+                  // current Conditions
                   (temp != 0.0)
                       ? Text(
                           condition,
@@ -411,6 +428,7 @@ class _HomePageState extends State<HomePage> {
                   )
                 : CircularProgressIndicator(),
 
+            // 24hr Forcast
             Container(
               margin: EdgeInsets.all(20),
               child: Divider(

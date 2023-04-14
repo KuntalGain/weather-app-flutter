@@ -1,3 +1,4 @@
+// Weather Class represents the current Weather Conditions
 class Weather {
   // parameters
   double temp;
@@ -17,6 +18,7 @@ class Weather {
     this.condition = '',
   });
 
+  //Method to Create Weather Object from API json Data
   factory Weather.fromJson(Map<String, dynamic> json) {
     return Weather(
       temp: json['current']['temp_c'],
@@ -29,6 +31,7 @@ class Weather {
   }
 }
 
+// Forcast Class represents the 24hr Weather Forcast
 class Forcast {
   String time;
   double temp;
@@ -41,6 +44,7 @@ class Forcast {
       this.condition = '',
       this.weatherCondition = 0.0});
 
+  // Method to create Forcast Object from API json data
   factory Forcast.fromJson(Map<String, dynamic> json) {
     return Forcast(
       temp: json["hour"]["temp_c"],

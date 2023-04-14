@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/services/weather_icons.dart';
 
+// Method for showing Weather Card
 Widget weatherCard(
     {required double temp, required String date, required String condition}) {
   return Padding(

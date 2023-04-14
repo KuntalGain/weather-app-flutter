@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
+// SavedCityList widget helps to Manages city query,add,deletion operations
 class SavedCityList extends StatefulWidget {
   final String cityName;
   final Function() onTap;
