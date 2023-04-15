@@ -16,7 +16,7 @@ Simple Weather App Build using Flutter Framework and Weatheapi.com realtime Weat
 - Interactive UI
 - Splash screen
 - Realtime Weather
-- next 7 Days Forcast
+- next 24hr Weather Forcast
 - Additional Information as Feels Like,Humidity,Pressure,Wind Speed
 - 3D Weather Icons defined by Conditions
 - City Storage
@@ -24,7 +24,7 @@ Simple Weather App Build using Flutter Framework and Weatheapi.com realtime Weat
 - Notification Alert of Rain Prediction
 
 ## 🏷️ Future Updates
-- 14 Days Weather Forcast
+- 7 Days Weather Forcast
 - Graphical Virtualizer
 - More Infomation
 
