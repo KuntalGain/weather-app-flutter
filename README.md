@@ -1,4 +1,4 @@
-# Weather App (v.1.0)
+# Weatherify (v.1.0.1)
 
 ## ⭐Table Content
 
